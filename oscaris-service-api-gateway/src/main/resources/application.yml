@@ -23,6 +23,13 @@ spring:
           predicates:
             - Path=/auth/**
 
+        - id: invoicing-system
+          uri: lb://INVOICING-SYSTEM
+          predicates:
+            - Path=/invoice/**
+          filters:
+            - AuthenticationFilter
+
   config:
     import: optional:file:.env[.properties]
 

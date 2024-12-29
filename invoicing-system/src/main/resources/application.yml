@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: INVOICING-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: services.yml
+      label: main
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - configserver:http://localhost:8888
+
+---
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${SUPPORT_EMAIL}
+    password: ${APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+server:
+  port: 9090
+
+feign:
+  client:
+    config:
+      default:
+        retryer:
+          period: 1000   # Initial period for retries
+          maxPeriod: 5000  # Maximum retry period
+          maxAttempts: 5   # Max retry attempts
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

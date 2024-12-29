@@ -7,15 +7,27 @@ package com.oscaris.caterers.oscaris_company_service.api;
 */
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.netflix.discovery.converters.Auto;
+import com.oscaris.caterers.oscaris_company_service.dto.Company;
+import com.oscaris.caterers.oscaris_company_service.dto.requests.CompanyRequest;
+import com.oscaris.caterers.oscaris_company_service.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
 public class CompanyController {
+
+    private final CompanyService companyService;
+
+    @Autowired
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
 
     @GetMapping("/companies")
@@ -26,5 +38,16 @@ public class CompanyController {
                "SERENGETI ENERGY",
                "ASCENT AFRICA"
        );
+    }
+
+    @PostMapping("/add-company")
+    public ResponseEntity<?> addCompany(@RequestBody CompanyRequest companyRequest){
+        return new ResponseEntity<>(companyService.addCompany(companyRequest),
+                HttpStatus.CREATED);
+    }
+
+    @GetMapping("/company/{companyId}")
+    Company getCustomerById(@PathVariable("companyId") Long companyId){
+        return companyService.getCompanyById(companyId);
     }
 }
