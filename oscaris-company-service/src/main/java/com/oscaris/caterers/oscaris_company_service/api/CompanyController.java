@@ -18,7 +18,7 @@ import java.util.List;
 public class CompanyController {
 
 
-    @GetMapping
+    @GetMapping("/companies")
     public List<String> getCompanies(){
        return List.of(
                "FRONTIER ENERGY",

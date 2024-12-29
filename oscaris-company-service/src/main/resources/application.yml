@@ -1,0 +1,14 @@
+server:
+  port: 7878
+spring:
+  application:
+    name: CUSTOMER-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: services.yml
+      label: main
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - configserver:http://localhost:8888
