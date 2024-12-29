@@ -4,12 +4,6 @@ server:
 spring:
   application:
     name: config-server
-  security:
-    basic:
-      enabled: true
-    user:
-      name: configuser
-      password: configPass$1234
   cloud:
     config:
       server:
@@ -20,12 +14,9 @@ spring:
           timeout: 10
           username: ${github-username}
           password: ${github-password}
+          default-label: main
   config:
     import: optional:file:.env[.properties]
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
 
 
 

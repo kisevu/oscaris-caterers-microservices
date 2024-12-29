@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: AUTH-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: auth-service.yml
+      label: main
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - configserver:http://localhost:8888
+
+
+
