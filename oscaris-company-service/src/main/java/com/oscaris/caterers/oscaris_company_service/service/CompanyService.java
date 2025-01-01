@@ -14,4 +14,6 @@ public interface CompanyService {
     String addCompany(CompanyRequest companyRequest);
 
     Company getCompanyById(Long companyId);
+
+    Company updateCompany(String email, Long companyId);
 }

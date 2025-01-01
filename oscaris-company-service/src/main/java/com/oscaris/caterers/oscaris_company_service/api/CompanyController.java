@@ -50,4 +50,10 @@ public class CompanyController {
     Company getCustomerById(@PathVariable("companyId") Long companyId){
         return companyService.getCompanyById(companyId);
     }
+
+    @PatchMapping("/update")
+    public Company updateCompany(@RequestParam("email") String email,
+                                 @RequestParam("companyId") Long companyId){
+        return companyService.updateCompany(email,companyId);
+    }
 }

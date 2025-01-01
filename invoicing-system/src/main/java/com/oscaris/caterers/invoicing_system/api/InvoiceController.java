@@ -14,6 +14,8 @@ import com.oscaris.caterers.invoicing_system.services.InvoiceService;
 import jakarta.mail.MessagingException;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -58,6 +60,13 @@ public class InvoiceController {
         emailService.sendInvoiceEmail(invoice.getCustomerEmail(), pdfContent);
 
         return "Invoice PDF sent successfully!";
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateInvoiceAndItem(@RequestParam("email") String email,
+                                                  @RequestParam("invoiceId") Long invoiceId){
+        return new ResponseEntity<>(invoiceService.updateInvoiceAndItem(email,invoiceId),
+                HttpStatus.OK);
     }
 
 }

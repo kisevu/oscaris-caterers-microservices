@@ -14,6 +14,7 @@ import com.oscaris.caterers.invoicing_system.dto.InvoiceItem;
 import com.oscaris.caterers.invoicing_system.dto.InvoiceItemRequest;
 import com.oscaris.caterers.invoicing_system.dto.InvoiceRequest;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
@@ -72,5 +74,13 @@ public class InvoiceService {
         return invoiceRepository.findById(invoiceId)
                 .orElseThrow(
                         ()->new RuntimeException("invoice with ID :"+invoiceId+"not found."));
+    }
+
+    public String updateInvoiceAndItem(String email, Long invoiceId){
+        Invoice invoiceById = getInvoiceById(invoiceId);
+        log.info("Existing email:{}",invoiceById.getCustomerEmail());
+        invoiceRepository.updateInvoiceAndItem(email,invoiceId);
+        log.info("Changed email:{}",invoiceById.getCustomerEmail());
+        return invoiceById.getCustomerEmail().equals(email) ? "updated successfully." : "update failed.";
     }
 }

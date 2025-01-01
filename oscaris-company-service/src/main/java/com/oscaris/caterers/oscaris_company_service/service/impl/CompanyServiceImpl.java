@@ -11,10 +11,12 @@ import com.oscaris.caterers.oscaris_company_service.dto.CompanyAddress;
 import com.oscaris.caterers.oscaris_company_service.dto.requests.CompanyRequest;
 import com.oscaris.caterers.oscaris_company_service.repository.CompanyRepository;
 import com.oscaris.caterers.oscaris_company_service.service.CompanyService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
@@ -47,5 +49,15 @@ public class CompanyServiceImpl implements CompanyService {
     public Company getCompanyById(Long companyId) {
         return companyRepository.findById(companyId)
                 .orElseThrow(()-> new RuntimeException("Company could not be found"));
+    }
+
+    @Override
+    public Company updateCompany(String email, Long companyId) {
+        companyRepository.updateCompany(email,companyId);
+        Company companyById = getCompanyById(companyId);
+        if(companyById.getEmail().equals(email)){
+            return companyById;
+        }
+        return null;
     }
 }
