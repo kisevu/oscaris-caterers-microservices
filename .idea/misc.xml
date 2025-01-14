@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/oscaris-company-service/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/invoicing-system/pom.xml" />
+        <option value="$PROJECT_DIR$/employee-management/pom.xml" />
       </list>
     </option>
   </component>
