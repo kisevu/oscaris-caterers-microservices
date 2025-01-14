@@ -1,34 +1,6 @@
 spring:
   application:
     name: API-GATEWAY
-  cloud:
-    gateway:
-      routes:
-        - id: customer-service
-          uri: lb://CUSTOMER-SERVICE
-          predicates:
-            - Path=/customer/**
-          filters:
-            - AuthenticationFilter
-
-        - id: kitchen-service
-          uri: lb://KITCHEN-SERVICE
-          predicates:
-            - Path=/kitchen/**
-          filters:
-            - AuthenticationFilter
-
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/auth/**
-
-        - id: invoicing-system
-          uri: lb://INVOICING-SYSTEM
-          predicates:
-            - Path=/invoice/**
-          filters:
-            - AuthenticationFilter
 
   config:
     import: optional:file:.env[.properties]
@@ -47,11 +19,14 @@ logging:
     org.springframework.web: DEBUG
     org.springframework.boot.actuate.endpoint.web: DEBUG
 
-# JWT secret key
-security:
-  jwt:
-    secret-key: ${JWT_SECRET_KEY}
-    expiration-time: 3600000
+---
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/spring
+
 
 
 
