@@ -3,6 +3,8 @@ package com.ameda.works.chat_oscaris.api;
 
 import com.ameda.works.chat_oscaris.requests.MessageRequest;
 import com.ameda.works.chat_oscaris.services.MessageService;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/v1/messages")
 @RequiredArgsConstructor
+@Tag(name = "Message")
 public class MessageController {
 
     private final MessageService messageService;
@@ -28,7 +31,7 @@ public class MessageController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMessage(
             @RequestParam("chat-id") String chatId,
-            //todo - parameter from swagger
+            @Parameter()
             @RequestParam("file") MultipartFile file,
             Authentication currentUser
     ){

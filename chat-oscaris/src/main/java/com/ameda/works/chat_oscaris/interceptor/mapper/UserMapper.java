@@ -3,10 +3,12 @@ package com.ameda.works.chat_oscaris.interceptor.mapper;
 
 import com.ameda.works.chat_oscaris.entities.user.User;
 import com.ameda.works.chat_oscaris.responses.UserResponse;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@Service
 public class UserMapper {
 
     public User fromTokenAttributes(Map<String, Object> attributes ) {

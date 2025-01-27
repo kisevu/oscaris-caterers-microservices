@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Table( name = "messages")
 @NamedQuery(name = MessageConstants.FIND_MESSAGES_BY_CHAT_ID,

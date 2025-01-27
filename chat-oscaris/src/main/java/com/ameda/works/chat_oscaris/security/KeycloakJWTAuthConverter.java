@@ -1,7 +1,6 @@
 package com.ameda.works.chat_oscaris.security;
 
 import io.micrometer.common.lang.NonNull;
-import jakarta.validation.constraints.Min;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -3,6 +3,7 @@ package com.ameda.works.chat_oscaris.api;
 
 import com.ameda.works.chat_oscaris.responses.CustomResponse;
 import com.ameda.works.chat_oscaris.services.ChatService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/chats")
 @RequiredArgsConstructor
+@Tag(name = "Chat")
 public class ChatController {
 
 

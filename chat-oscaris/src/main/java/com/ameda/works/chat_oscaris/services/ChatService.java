@@ -50,6 +50,7 @@ public class ChatService {
         Chat chat = new Chat();
         chat.setSender(sender);
         chat.setRecipient(receiver);
-
+        Chat savedChat = chatRepository.save(chat);
+        return savedChat.getId();
     }
 }
