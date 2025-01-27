@@ -42,5 +42,6 @@ public class Message extends BasedAuditor {
     private String senderId;
     @Column(nullable = false, name = "receiver_id")
     private String receiverId;
+    private String mediaFilePath;
 
 }
